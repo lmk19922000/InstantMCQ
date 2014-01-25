@@ -16,17 +16,21 @@ UnaController.onScreenInput("TESTUNA", function(res){
 	var a = document.createElement("h2");
 	a.textContent = "Question: " + ques;
 	document.body.appendChild(a);
-	for (i in ans){
+	for (var i in ans){
 		var div = $(document.createElement("div"));
 		var button = $(document.createElement("button"));
+		var id = ans[i];
 		button.text(ans[i].trim());
 		button.attr("id",i);
 		$(div).append(button);
 		$("body").append(div);
-		button.click(function() {
-			console.log("clicked");
-			UnaController.sendToScreen("buttonClicked", { buttonID: i });
-		});
+		var buttonID = document.getElementById(i);
+		buttonID.onclick = function(){
+			console.log("clicked  "+ $(this).text());
+			UnaController.sendToScreen("buttonClicked", { answer: $(this).text()});
+			console.log("sent");
+		}
+		
 	}
 })
 
