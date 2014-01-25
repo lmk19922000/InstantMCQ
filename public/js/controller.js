@@ -17,8 +17,16 @@ UnaController.onScreenInput("TESTUNA", function(res){
 	a.textContent = "Question: " + ques;
 	document.body.appendChild(a);
 	for (i in ans){
-		var button = document.createElement("button");
-		button.textContent = ans[i].trim();
-		document.body.appendChild(button);
+		var div = $(document.createElement("div"));
+		var button = $(document.createElement("button"));
+		button.text(ans[i].trim());
+		button.attr("id",i);
+		$(div).append(button);
+		$("body").append(div);
+		button.click(function() {
+			console.log("clicked");
+			UnaController.sendToScreen("buttonClicked", { buttonID: i });
+		});
 	}
 })
+

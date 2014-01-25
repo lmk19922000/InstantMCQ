@@ -1,12 +1,16 @@
+<meta name="viewport" content="width=device-width">
 h2 Screen
 script(src='/socket.io/socket.io.js')
 script(src='/una_js/una.js')
 script(src='/js/screen.js')
 script(src='/lib/jquery-1.11.0.min.js')
+script(src='https://www.google.com/jsapi')
 
+body
 div
 	div
 		form(name="createQuestionFrom")
 			input(name="question",type="text", placeholder="What is the question?")
 			input(name="answers", type="text", placeholder="what are the choices")
 			button(type="button", onclick="createQuestion()") confirm
+	div(id="chart_div")
