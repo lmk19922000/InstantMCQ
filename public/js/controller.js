@@ -34,6 +34,7 @@ UnaController.onScreenInput("TESTUNA", function(res){
 
 UnaController.onScreenInput("newQuestion", function(res){
 	$("#question").text("");
+	$("#answers").children();
 	$("#answers").empty();
 });
 

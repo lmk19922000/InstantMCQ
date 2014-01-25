@@ -2,6 +2,10 @@ var room_id = 'room1';
 var screen_data = {name: 'screen'};
 var student_ids = [];
 
+
+
+
+
 UnaScreen.register(room_id, screen_data, function(res) {
 	if (res.success) {
 		event_key = "TESTUNA";
@@ -68,6 +72,13 @@ document.onload = function(){				//google drawing stuffs, need to load later.
 };
 
 var createQuestion = function(){
+	if(typeof (clock) == 'undefined'){
+		clock = $('.clock').FlipClock({
+			countdown:false
+		});
+	}
+	clock.setCountdown(false);
+	clock.start();
 	var question = $("form").serializeArray()[0]["value"];
 	var ans = $("form").serializeArray()[1]["value"];
 	for (i in student_ids){
@@ -81,9 +92,11 @@ var createQuestion = function(){
 }
 
 var clearQuestion = function(){
+	clock.setTime(0000);
+	clock.stop();
 	$("input").val("");
 	$("#chart_div").empty();
 	for (i in student_ids){
 		UnaScreen.sendToController(student_ids[i], "newQuestion");
 	}
-}
+};

@@ -1,5 +1,5 @@
-<meta name="viewport" content="width=device-width">
-h2 Screen
+meta(name="viewport" content="width=device-width")
+
 script(src='/lib/jquery-1.11.0.min.js')
 script(src='https://www.google.com/jsapi')
 script(src='/lib/flipclock.min.js')
@@ -16,11 +16,6 @@ div
 	div(style='display:inline-block')
 		form(name="createQuestionFrom")
 			div
-				input(name="question",type="text", placeholder="What is the question?")
-			div 
-				input(name="answers", type="text", placeholder="what are the choices")
-			button(type="button", onclick="createQuestion()") confirm
-			button(type="button", onclick="clearQuestion()") new
-		div(class='clock')
-			button(onclick="clock.stop()") stopTimer
-	div(id="chart_div")
+				input(name="roomName",type="text", placeholder="Room name to join?")
+			button(type="button", onclick="createRoom()") Create New
+			button(type="button", onclick="joinRoom()") Join
