@@ -13,9 +13,7 @@ UnaController.register(room_id, controller_data, function(res) {
 UnaController.onScreenInput("TESTUNA", function(res){
 	var ques = res.payload.question;
 	var ans = res.payload.answers.split(",");
-	var a = document.createElement("h2");
-	a.textContent = "Question: " + ques;
-	document.body.appendChild(a);
+	$("#question").text("Question: " + ques);
 	for (var i in ans){
 		var div = $(document.createElement("div"));
 		var button = $(document.createElement("button"));
@@ -23,7 +21,7 @@ UnaController.onScreenInput("TESTUNA", function(res){
 		button.text(ans[i].trim());
 		button.attr("id",i);
 		$(div).append(button);
-		$("body").append(div);
+		$("#answers").append(div);
 		var buttonID = document.getElementById(i);
 		buttonID.onclick = function(){
 			console.log("clicked  "+ $(this).text());
@@ -32,5 +30,10 @@ UnaController.onScreenInput("TESTUNA", function(res){
 		}
 		
 	}
-})
+});
+
+UnaController.onScreenInput("newQuestion", function(res){
+	$("#question").text("");
+	$("#answers").empty();
+});
 

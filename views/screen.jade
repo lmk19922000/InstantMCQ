@@ -5,7 +5,7 @@ script(src='/socket.io/socket.io.js')
 script(src='/una_js/una.js')
 script(src='/js/screen.js')
 script(src='/lib/jquery-1.11.0.min.js')
-script(src='/css/bootstrap.min.css')
+
 
 body
 div
@@ -16,4 +16,5 @@ div
 			div 
 				input(name="answers", type="text", placeholder="what are the choices")
 			button(type="button", onclick="createQuestion()") confirm
+			button(type="button", onclick="clearQuestion()") new
 	div(id="chart_div")

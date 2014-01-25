@@ -67,7 +67,7 @@ document.onload = function(){				//google drawing stuffs, need to load later.
 	
 };
 
-var createQuestion = function(form){
+var createQuestion = function(){
 	var question = $("form").serializeArray()[0]["value"];
 	var ans = $("form").serializeArray()[1]["value"];
 	for (i in student_ids){
@@ -77,5 +77,13 @@ var createQuestion = function(form){
 			question: question,
 			answers: ans
 		});	
+	}
+}
+
+var clearQuestion = function(){
+	$("input").val("");
+	$("#chart_div").empty();
+	for (i in student_ids){
+		UnaScreen.sendToController(student_ids[i], "newQuestion");
 	}
 }
