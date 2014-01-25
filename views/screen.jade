@@ -1,4 +1,12 @@
-<h2>screen</h2>
-<script src='/socket.io/socket.io.js'></script>
-<script src='/una_js/una.js'></script>
-<script src='/js/screen.js'></script>
+h2 Screen
+script(src='/socket.io/socket.io.js')
+script(src='/una_js/una.js')
+script(src='/js/screen.js')
+script(src='/lib/jquery-1.11.0.min.js')
+
+div
+	div
+		form(name="createQuestionFrom")
+			input(name="question",type="text", placeholder="What is the question?")
+			input(name="answers", type="text", placeholder="what are the choices")
+			button(type="button", onclick="createQuestion()") confirm

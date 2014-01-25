@@ -1,33 +1,7 @@
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
-<h2>controller</h2>
-<script src='/socket.io/socket.io.js'></script>
-<script src='/una_js/una.js'></script>
-<script src='/js/controller.js'></script>
+meta(name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
 
-<button id="buttonA" style="height:50px; width:50px">A</button>
-<button id="buttonB" style="height:50px; width:50px">B</button>
-<button id="buttonC" style="height:50px; width:50px">C</button>
-<button id="buttonD" style="height:50px; width:50px">D</button>
-
-script(type='text/javascript').
-	var buttonA = document.getElementById("buttonA");
-	var buttonB = document.getElementById("buttonB");
-	var buttonC = document.getElementById("buttonC");
-	var buttonD = document.getElementById("buttonD");
-
-	buttonA.onclick=function(){
-		console.log("button A pressed");
-		UnaController.sendToScreen("buttonClicked", {buttonID:"A"});
-	}
-	buttonB.onclick=function(){
-		console.log("button B pressed");
-		UnaController.sendToScreen("buttonClicked", {buttonID:"B"});
-	}
-	buttonC.onclick=function(){
-		console.log("button C pressed");
-		UnaController.sendToScreen("buttonClicked", {buttonID:"C"});
-	}	
-	buttonD.onclick=function(){
-		console.log("button D pressed");
-		UnaController.sendToScreen("buttonClicked", {buttonID:"D"});
-	}
+h2
+script(src='/socket.io/socket.io.js')
+script(src='/una_js/una.js')
+script(src='/js/controller.js')
+script(src='/lib/jquery-1.11.0.min.js')
