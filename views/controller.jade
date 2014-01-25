@@ -10,6 +10,15 @@
 <button id="buttonD" style="height:50px; width:50px">D</button>
 
 script(type='text/javascript').
+	var room_id = 'room1';
+	var controller_data = {name: 'player1'};
+	UnaController.register(room_id, controller_data, function(res) {
+		if (res.success) {
+			// Controller registered successfully
+		} else {
+			// Controller registration failed
+		}
+	});
 	var buttonA = document.getElementById("buttonA");
 	var buttonB = document.getElementById("buttonB");
 	var buttonC = document.getElementById("buttonC");
