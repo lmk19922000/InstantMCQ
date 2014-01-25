@@ -1,0 +1,10 @@
+{
+  "name": "InstantMCQ",
+  "description": "collect answers in class",
+  "version": "0.0.1",
+  "private": true,
+  "dependencies": {
+    "una": "~0.4.1",
+    "jade": "1.1.5"
+  }
+}
