@@ -1,5 +1,8 @@
 html(ng-app="instantMCQ")
 meta(name="viewport" content="width=device-width")
+link(rel='stylesheet',href='/css/main.css')
+link(rel='stylesheet',href='/css/bootstrap.css')
+link(rel='stylesheet',href='/css/bootstrap-theme.css')
 head
 	script(src='/lib/jquery-1.11.0.min.js')
 	script(src='/lib/angular.js')
@@ -10,9 +13,5 @@ head
 	script(src='/js/app.js')
 	script(src='/js/controllers.js')
 	script(src='/lib/angular-timer.min.js')
-	
-
-link(rel='stylesheet', href='/css/bootstrap.min.css')
-link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
 
 body(class='ng-view')

@@ -1,5 +1,5 @@
 h2 InstantMCQ
-h3(id="question") {{current.ques}}
+h3(id="question") {{"Question: " + current.ques}}
 div(id="answers")
 	div(ng-repeat="answer in current.ans")
 		button(ng-click="buttonHandler(answer)") {{answer}}

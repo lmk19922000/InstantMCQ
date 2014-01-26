@@ -125,6 +125,7 @@ instantMCQControllers.controller('ScreenCtrl', ['$scope', '$location','$routePar
 		}
 
 		$scope.clearQuestion = function(){
+			$scope.startTimer();
 			$scope.stopTimer();
 			current = {};
 			$("input").val("");

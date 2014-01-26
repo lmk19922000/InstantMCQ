@@ -7,4 +7,5 @@ form(name="createQuestionForm")
 		button(type="button", ng-click="createQuestion()") confirm
 		button(type="button", ng-click="clearQuestion()") new
 	timer(interval="1000",autostart="false") {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds
+	button(type="button", ng-click="stopTimer()") Stop timer
 	div(id="chart_div")
