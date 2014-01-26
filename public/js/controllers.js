@@ -2,8 +2,9 @@ google.load('visualization', '1.0', {'packages':['corechart']});
 
 instantMCQControllers = angular.module('instantMCQControllers',['timer']);
 
-instantMCQControllers.controller('IndexCtrl', ['$scope','$location',
-	function($scope, $location) {
+instantMCQControllers.controller('IndexCtrl', ['$scope','$location','$routeParams',
+	function($scope, $location,$routeParams) {
+		if ($routeParams)
 		$scope.createRoom = function() {
 			$location.path('/screen/' + $scope.roomId);
 		};
@@ -128,7 +129,7 @@ instantMCQControllers.controller('ScreenCtrl', ['$scope', '$location','$routePar
 				// }
 				// UnaScreen.onControllerInput(event_key,handler);
 			} else {
-
+				$location.path('/error');
 			}
 		});
 
@@ -215,6 +216,7 @@ instantMCQControllers.controller('ScreenCtrl', ['$scope', '$location','$routePar
 			current = {};
 			$("input").val("");
 			$("#chart_div").empty();
+			$("#save_div").css('visibility','hidden');
 			for (i in student_ids){
 				UnaScreen.sendToController(student_ids[i], "newQuestion");
 			}
@@ -255,9 +257,7 @@ instantMCQControllers.controller('ControllerCtrl',['$scope', '$location', '$rout
 		};
 
 		UnaController.onScreenInput("newQuestion", function(res){
-			$("#question").text("");
-			$("#answers").children();
-			$("#answers").empty();
+			$rootScope.$apply($scope.current = {});
 		});
 
 
