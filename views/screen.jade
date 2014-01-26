@@ -1,0 +1,49 @@
+<meta name="viewport" content="width=device-width">
+h2 Screen
+script(src='/lib/jquery-1.11.0.min.js')
+script(src='https://www.google.com/jsapi')
+script(src='/lib/flipclock.min.js')
+script(src='/socket.io/socket.io.js')
+script(src='/una_js/una.js')
+script(src='/js/screen.js')
+script(src='http://canvg.googlecode.com/svn/trunk/rgbcolor.js')
+script(src='http://canvg.googlecode.com/svn/trunk/canvg.js')
+script(src='/lib/d3.min.js')
+script(src='/lib/cloud.js')
+
+link(rel='stylesheet', href='/css/bootstrap.min.css')
+link(rel='stylesheet', href='/css/bootstrap-theme.min.css')
+link(rel='stylesheet', href='/css/flipclock.css')
+
+body
+div
+	div(style='display:inline-block')
+		form(name="createQuestionFrom")
+			div
+				input(name="question",type="text", placeholder="What is the question?")
+			div 
+				input(name="answers", type="text", placeholder="what are the choices")
+			button(type="button", onclick="createQuestion()") confirm
+
+			button(type="button", onclick="clearQuestion()") new
+		div(class='clock')
+			button(onclick="clock.stop()") stopTimer
+		div 
+			button(type="button", onclick="buttonSaveImage()") Save Chart
+			button(type="button", onclick="buttonChangeToColumnChart()") Change Chart
+			button(type="button", onclick="buttonWordCloud()") Tag Cloud
+
+			form(action="renderOptionForm")
+				input(type='radio', name='thing', id='chart_div', onclick="handleRadioClick(this)",checked)
+				b Pie Chart
+				br
+				input(type='radio', name='thing', id='barchart_div', onclick="handleRadioClick(this)")
+				b Bar Chart
+				br
+				input(type='radio', name='thing', id='tagecloud_div', onclick="handleRadioClick(this)")
+				b Tag Cloud
+				br
+
+		div(id="chart_div")
+		div(id="barchart_div")
+		div(id="tagecloud_div")
