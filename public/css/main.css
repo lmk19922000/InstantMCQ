@@ -48,3 +48,13 @@ form input {
 	margin-left: auto;
 	margin-right: auto;
 }
+#answers button {
+	margin: 5px;
+	background-color: #428bca;
+}
+#formContainer {
+	background-color: #eeeeee;
+	padding: 10px;
+	display: inline-block;
+	border-radius: 8px;
+}
