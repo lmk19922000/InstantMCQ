@@ -1,0 +1,50 @@
+#roomForm {
+	margin-top: 100px;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+form[name="roomForm"] button {
+	margin-left: auto;
+	margin-right: auto;
+}
+
+form[name="createQuestionForm"] button{
+	padding: 0px;
+	text-align: center;
+	width: 100px;
+	height: 30px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+form[name="createQuestionForm"] div{
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+form input {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 400px;
+	height: 40px;
+	border-radius: 6px;
+}
+#timer {
+	text-align: center;
+}
+
+#chart_div div {
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+#save_div {
+	visibility: hidden;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
