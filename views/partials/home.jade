@@ -1,6 +1,7 @@
 h2(class="text-center") InstantMCQ
 	h3(class="text-center") Giving students headaches since 2014
 		div
+			h4(class="has-error",ng-show="{{typeof(error) != 'undefined'}}") Somebody got your name? How about trying a different one?
 			div(id="formContainer")
 				form(id="roomForm")
 					input(id="create",type="text", name="roomName", ng-model="roomId", placeholder="Room name to join?")

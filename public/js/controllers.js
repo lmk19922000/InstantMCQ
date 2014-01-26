@@ -15,6 +15,21 @@ instantMCQControllers.controller('IndexCtrl', ['$scope','$location','$routeParam
 
 instantMCQControllers.controller('ScreenCtrl', ['$scope', '$location','$routeParams',
 	function($scope, $location, $routeParams) {
+
+		UnaScreen.register(room_id, screen_data, function(res) {
+			if (res.success) {
+				// event_key = "REGISTER";
+				// handler = function(res){
+				// 	var a = document.createElement("h2");
+				// 	a.textContent = res.payload.mes;
+				// 	document.body.appendChild(a);
+				// }
+				// UnaScreen.onControllerInput(event_key,handler);
+			} else {
+				$location.path('/error');
+			}
+		});
+		$scope.error = $routeParams.error;
 		$scope.roomName = $routeParams.screenName
 		var room_id = $scope.roomName;
 		var screen_data = {name: 'screen'};
@@ -119,19 +134,6 @@ instantMCQControllers.controller('ScreenCtrl', ['$scope', '$location','$routePar
 			console.log('Timer Stopped - data = ', data);
 		});
 
-		UnaScreen.register(room_id, screen_data, function(res) {
-			if (res.success) {
-				// event_key = "REGISTER";
-				// handler = function(res){
-				// 	var a = document.createElement("h2");
-				// 	a.textContent = res.payload.mes;
-				// 	document.body.appendChild(a);
-				// }
-				// UnaScreen.onControllerInput(event_key,handler);
-			} else {
-				$location.path('/error');
-			}
-		});
 
 		UnaScreen.onControllerJoin(function(data){
 			if (typeof (student_ids[data.una.id]) == 'undefined'){
@@ -200,7 +202,6 @@ instantMCQControllers.controller('ScreenCtrl', ['$scope', '$location','$routePar
 			var ans = $("form").serializeArray()[1]["value"];
 			current['ques'] = question;
 			current['ans'] = ans;
-			console.log(student_ids);
 			for (i in student_ids){
 				UnaScreen.sendToController(student_ids[i],"TESTUNA", 
 				{

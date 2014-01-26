@@ -3,7 +3,7 @@ app = angular.module('instantMCQ', ['ngRoute','instantMCQControllers']);
 app.config(['$routeProvider','$locationProvider',
 	function ($routeProvider,$locationProvider) {
 		$routeProvider.
-		when('/', {
+		when('/:error', {
 			templateUrl: '/partials/home',
 			controller: 'IndexCtrl'
 		}).

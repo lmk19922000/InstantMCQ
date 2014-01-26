@@ -58,3 +58,6 @@ form input {
 	display: inline-block;
 	border-radius: 8px;
 }
+h4.has-error {
+	color: #c12e2a;
+}
