@@ -20,6 +20,90 @@ instantMCQControllers.controller('ScreenCtrl', ['$scope', '$location','$routePar
 		var student_ids = [];
 		var current = {};
 
+		$scope.buttonSaveImage = function(){
+			$scope.saveAsImg(document.getElementById('chart_div'));
+		}
+		$scope.getImageData = function(chartContainer) {
+			var chartArea = chartContainer.getElementsByTagName('svg')[0].parentNode;
+			var svg = chartArea.innerHTML;
+			var doc = chartContainer.ownerDocument;
+			var canvas = doc.createElement('canvas');
+			canvas.setAttribute('width', chartArea.offsetWidth);
+			canvas.setAttribute('height', chartArea.offsetHeight);
+
+
+			canvas.setAttribute(
+				'style',
+				'position: absolute; ' +
+				'top: ' + (-chartArea.offsetHeight * 2) + 'px;' +
+				'left: ' + (-chartArea.offsetWidth * 2) + 'px;');
+			doc.body.appendChild(canvas);
+			canvg(canvas, svg);
+			var imgData = canvas.toDataURL('image/png');
+			canvas.parentNode.removeChild(canvas);
+			return imgData;
+		}
+
+		$scope.saveAsImg = function(chartContainer) {
+			var imgData = $scope.getImageData(chartContainer);
+
+			// Replacing the mime-type will force the browser to trigger a download
+			// rather than displaying the image in the browser window.
+			var currentdate = new Date();
+			var datetime =  currentdate.getFullYear()+ "-"+(currentdate.getMonth()+1) + "-" + currentdate.getDate() + " @ " 
+			+ currentdate.getHours() + ":" 
+			+ currentdate.getMinutes() + ":" + currentdate.getSeconds();
+			var imageLink = document.createElement("a");
+			imageLink.href = imgData;
+			imageLink.download = current.ques.trim()+'.png';
+			imageLink.click();
+			//window.location = imgData.replace('image/png', 'image/octet-stream');
+		}
+
+		$scope.toImg = function(chartContainer, imgContainer) { 
+			var doc = chartContainer.ownerDocument;
+			var img = doc.createElement('img');
+			img.src = $scope.getImgData(chartContainer);
+
+			while (imgContainer.firstChild) {
+				imgContainer.removeChild(imgContainer.firstChild);
+			}
+			imgContainer.appendChild(img);
+		}
+
+		$scope.SaveAsPDF = function(){
+			var doc = new jsPDF();
+			var doc = new jsPDF();
+			var imgData = $scope.getImgData(document.getElementById('chart_div'));
+			doc.addImage(imgData, 'JPEG', 0, 0, window.innerWidth*0.2, window.innerHeight*0.2);
+
+			doc.save(current.ques.trim() + '.pdf');
+		}
+
+		$scope.getImgData = function(chartContainer) {
+			var chartArea = chartContainer.getElementsByTagName('svg')[0].parentNode;
+			var svg = chartArea.innerHTML;
+			var doc = chartContainer.ownerDocument;
+			var canvas = doc.createElement('canvas');
+			canvas.setAttribute('width', chartArea.offsetWidth);
+			canvas.setAttribute('height', chartArea.offsetHeight);
+
+			canvas.setAttribute(
+				'style',
+				'position: absolute; ' +
+				'top: ' + (-chartArea.offsetHeight * 2) + 'px;' +
+				'left: ' + (-chartArea.offsetWidth * 2) + 'px;');
+			doc.body.appendChild(canvas);
+			canvg(canvas, svg);
+			canvas.parentNode.removeChild(canvas);
+
+			var imgData = canvas.toDataURL('image/jpeg').slice('data:image/jpeg;base64,'.length);
+			// Convert the data to binary form
+			imgData = atob(imgData);
+
+			return imgData;
+		}
+
 		$scope.startTimer = function (){
 			$scope.$broadcast('timer-start');
 			$scope.timerRunning = true;
@@ -101,11 +185,12 @@ instantMCQControllers.controller('ScreenCtrl', ['$scope', '$location','$routePar
 			data.addColumn('number', 'Slices');
 			data.addRows(tempData);
 			vpw = window.innerWidth*0.9;
-			vph = window.innerHeigh*0.9;
+			vph = window.innerHeight*0.9;
 			var options = {'title':'Multiple Choices Questions','width':vpw,'height':vph, pieSliceText: 'value'};
 
 			var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
 			chart.draw(data, options);
+			$("#save_div").css('visibility','visible');
 		}
 
 		$scope.createQuestion = function(){

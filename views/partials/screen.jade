@@ -4,8 +4,13 @@ form(name="createQuestionForm")
 			input(name="question",type="text", placeholder="What is the question?")
 		div 
 			input(name="answers", type="text", placeholder="what are the choices")
-		button(type="button", ng-click="createQuestion()") confirm
-		button(type="button", ng-click="clearQuestion()") new
+		div
+			button(class="btn-lg btn-success", type="button", ng-click="createQuestion()") confirm
+			button(class="btn-lg btn-success", type="button", ng-click="clearQuestion()") new
+div(id="timer")
 	timer(interval="1000",autostart="false") {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds
-	button(type="button", ng-click="stopTimer()") Stop timer
-	div(id="chart_div")
+	button(class="btn-lg btn-danger",type="button", ng-click="stopTimer()") Stop timer
+div(id="chart_div")
+div(id="save_div")
+	button(id="savePDF", class="btn-lg btn-danger",type="button", ng-click="SaveAsPDF()") Save as PDF
+	button(id="saveImg", class="btn-lg btn-danger",type="button", ng-click="buttonSaveImage()") Save as PNG
