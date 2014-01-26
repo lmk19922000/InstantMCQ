@@ -1,0 +1,128 @@
+<!doctype>
+<html>
+<head>
+	<title>jsPDF</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />	
+	<script type="text/javascript" src="js/jquery/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
+	<script type="text/javascript" src="js/canvg/canvg.js"></script>
+	<script type="text/javascript" src="js/canvg/rgbcolor.js"></script>
+	<script type="text/javascript" src="js/canvg/StackBlur.js"></script>
+	<script type="text/javascript" src="../jspdf.js"></script>
+	<script type="text/javascript" src="../libs/Deflate/adler32cs.js"></script>
+	<script type="text/javascript" src="../libs/FileSaver.js/FileSaver.js"></script>
+	<script type="text/javascript" src="../libs/Blob.js/BlobBuilder.js"></script>
+	<script type="text/javascript" src="../jspdf.plugin.addimage.js"></script>
+	<script type="text/javascript" src="../jspdf.plugin.standard_fonts_metrics.js"></script>
+	<script type="text/javascript" src="../jspdf.plugin.split_text_to_size.js"></script>
+	<script type="text/javascript" src="../jspdf.plugin.from_html.js"></script>
+	
+	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+</head>
+
+<body>
+	<script type="text/javascript">
+
+	var tempData = [
+          ['Mushrooms', 3],
+          ['Onions', 1],
+          ['Olives', 1],
+          ['Zucchini', 1],
+          ['Pepperoni', 2]
+        ];
+		
+      // Load the Visualization API and the piechart package.
+      google.load('visualization', '1.0', {'packages':['corechart']});
+		
+      // Set a callback to run when the Google Visualization API is loaded.
+      google.setOnLoadCallback(drawChart);
+
+      // Callback that creates and populates a data table,
+      // instantiates the pie chart, passes in the data and
+      // draws it.
+      function drawChart() {
+		
+        // Create the data table.
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Topping');
+        data.addColumn('number', 'Slices');
+        data.addRows(tempData);
+
+        // Set chart options
+        var options = {'title':'How Much Pizza I Ate Last Night',
+                       'width':800,
+                       'height':600};
+
+        // Instantiate and draw our chart, passing in some options.
+        var chart = new google.visualization.PieChart(document.getElementById('chart_div'));
+			
+        chart.draw(data, options);
+      }
+
+      function toImg(chartContainer, imgContainer) { 
+        var doc = chartContainer.ownerDocument;
+        var img = doc.createElement('img');
+        img.src = getImgData(chartContainer);
+        
+        while (imgContainer.firstChild) {
+          imgContainer.removeChild(imgContainer.firstChild);
+        }
+        imgContainer.appendChild(img);
+      }
+
+      function getImgData(chartContainer) {
+        var chartArea = chartContainer.getElementsByTagName('svg')[0].parentNode;
+        var svg = chartArea.innerHTML;
+        var doc = chartContainer.ownerDocument;
+        var canvas = doc.createElement('canvas');
+        canvas.setAttribute('width', chartArea.offsetWidth);
+        canvas.setAttribute('height', chartArea.offsetHeight);
+        
+        
+        canvas.setAttribute(
+            'style',
+            'position: absolute; ' +
+            'top: ' + (-chartArea.offsetHeight * 2) + 'px;' +
+            'left: ' + (-chartArea.offsetWidth * 2) + 'px;');
+        doc.body.appendChild(canvas);
+        canvg(canvas, svg);
+        //var imgData = canvas.toDataURL('image/png');
+        canvas.parentNode.removeChild(canvas);
+
+        var imgData = canvas.toDataURL('image/jpeg').slice('data:image/jpeg;base64,'.length);
+		// Convert the data to binary form
+		imgData = atob(imgData);
+
+        return imgData;
+      }
+
+	function Save(){
+		  var doc = new jsPDF();
+		  /*
+doc.text(20, 20, 'Hello world!');
+doc.text(20, 30, 'This is client-side Javascript, pumping out a PDF.');
+doc.addPage();
+doc.text(20, 20, 'Do you like that?');
+
+doc.save('Test.pdf');
+*/
+		var doc = new jsPDF();
+		var imgData = getImgData(document.getElementById('chart_div'));
+	doc.addImage(imgData, 'JPEG', 50, 50, 200, 150);
+	doc.addPage();
+	doc.addImage(imgData, 'JPEG', 50, 50, 200, 150);
+	//doc.addImage(imgData, 'JPEG', 70, 10, 100, 120);
+
+	// Output as Data URI
+	//doc.output('datauri');
+	doc.save('Test.pdf');
+	  }
+	
+	</script>
+	<div id="chart_div"></div>
+	<div id="image_div"></div>
+	    <button onclick="toImg(document.getElementById('chart_div'), document.getElementById('image_div'));">Convert to image</button>
+	<button onClick="Save()">Save PDF</button>
+</body>
+</html>
