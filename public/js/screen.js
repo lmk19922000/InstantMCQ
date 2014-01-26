@@ -2,10 +2,6 @@ var room_id = 'room1';
 var screen_data = {name: 'screen'};
 var student_ids = [];
 
-
-
-
-
 UnaScreen.register(room_id, screen_data, function(res) {
 	if (res.success) {
 		event_key = "TESTUNA";
@@ -67,9 +63,6 @@ function drawChart() {
 	chart.draw(data, options);
 }
 
-document.onload = function(){				//google drawing stuffs, need to load later.
-	
-};
 
 var createQuestion = function(){
 	if(typeof (clock) == 'undefined'){

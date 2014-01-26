@@ -1,0 +1,10 @@
+h2 InstantMCQ
+form(name="createQuestionForm")
+		div
+			input(name="question",type="text", placeholder="What is the question?")
+		div 
+			input(name="answers", type="text", placeholder="what are the choices")
+		button(type="button", ng-click="createQuestion()") confirm
+		button(type="button", ng-click="clearQuestion()") new
+	timer(interval="1000",autostart="false") {{hours}} hours, {{minutes}} minutes, {{seconds}} seconds
+	div(id="chart_div")
